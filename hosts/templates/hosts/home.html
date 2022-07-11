@@ -1,0 +1,13 @@
+<a href="{% url 'logout' %}">logout</a>
+{% for host in hosts %}
+    <h5>{{ host }} | {{ host.time_update }}
+        {% if request.user.is_staff %}
+            <a href="{% url 'host-update-admin' pk=host.pk %}">Edit</a>
+        {% else %}
+            <a href="{% url 'host-update' pk=host.pk %}">Edit</a>
+        {% endif %}
+        <a href="{% url 'host-delete' pk=host.pk %}">Delete</a></h5>
+{% empty %}
+    <h5>The list is empty!</h5>
+{% endfor %}
+<div>Do you wanna create the Host? <a href="{% url 'host-create' %}">Create</a></div>
